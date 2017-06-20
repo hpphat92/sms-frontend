@@ -1,0 +1,43 @@
+.iphone-bg {
+  background: url(/assets/images/iphone.png) no-repeat;
+  height: 600px;
+  width: 600px;
+  background-size: cover;
+  background-position: center;
+
+  #chat-content {
+    padding: 68px 0;
+    height: 600px;
+    width: 260px;
+    margin: 0 auto;
+    border-radius: 30px;
+
+    .chat-scrollable {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .message-row {
+      .bubble {
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .13) !important;
+      }
+    }
+  }
+
+  textarea.mat-input-element {
+    min-height: 30px;
+  }
+
+  .bubble-icon {
+    font-size: 20px;
+    margin: 0;
+    color: inherit;
+  }
+
+  .avatar {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+  }
+}

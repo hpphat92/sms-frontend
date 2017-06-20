@@ -1,0 +1,5 @@
+<div class="mb-16 font-size-12">
+  <div class="mat-select-placeholder">Days *</div>
+  <a class="k-button" [ngClass]="{'k-primary' : item.selected}" (click)="toggle(idx)"
+     *ngFor="let item of clonedSource; let idx = index;">{{item.name}}</a>
+</div>

@@ -1,0 +1,99 @@
+@mixin my-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  // background-color:      mat-color($accent);
+  // background-color:      mat-color($accent, 700);
+  // color:                 mat-color($accent, default-contrast);
+  // background:            mat-color($background, card);
+  // color:                 mat-color($foreground, text);
+  //                        map_get($theme, A400)
+  //                        mat-color($primary)
+
+  /* custom class */
+  .md-primary-backdrop {
+    background-color: rgb(45, 50, 62);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .md-primary-bg {
+    background-color: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+    &.mat-list-item {
+      color: mat-color($primary, default-contrast);
+    }
+  }
+
+  .md-primary-fg {
+    color: mat-color($primary) !important;
+  }
+
+  .md-dark-primary-bg {
+    background-color: mat-color($primary, $dark-hue);
+    color: mat-color($primary, default-contrast);
+    &.mat-list-item {
+      color: mat-color($primary, default-contrast);
+    }
+  }
+
+  .md-dark-primary-fg {
+    color: mat-color($primary, $dark-hue) !important;
+  }
+
+  .md-accent-bg {
+    background-color: mat-color($accent);
+    color: mat-color($accent, default-contrast);
+    &.mat-list-item {
+      color: mat-color($accent, default-contrast);
+    }
+  }
+
+  .md-accent-fg {
+    color: mat-color($accent) !important;
+  }
+
+  .md-dark-accent-bg {
+    background-color: mat-color($accent, $dark-hue);
+    color: mat-color($accent, default-contrast);
+    &.mat-list-item {
+      color: mat-color($accent, default-contrast);
+    }
+  }
+
+  .md-dark-accent-fg {
+    color: mat-color($accent, $dark-hue) !important;
+  }
+
+  .md-warn-bg {
+    background-color: mat-color($warn);
+    color: mat-color($warn, default-contrast);
+    &.mat-list-item {
+      color: mat-color($warn, default-contrast);
+    }
+  }
+
+  .md-warn-fg {
+    color: mat-color($warn) !important;
+  }
+
+  .md-dark-warn-bg {
+    background-color: mat-color($warn, $dark-hue);
+    color: mat-color($warn, default-contrast);
+    &.mat-list-item {
+      color: mat-color($warn, default-contrast);
+    }
+  }
+
+  .md-dark-warn-fg {
+    color: mat-color($warn, $dark-hue) !important;
+  }
+
+  md-content {
+    &.md-hue-2 {
+      color: rgba(0, 0, 0, 0.87);
+      background-color: rgb(245, 245, 245);
+    }
+  }
+}

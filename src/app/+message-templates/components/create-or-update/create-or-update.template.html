@@ -1,0 +1,52 @@
+<form [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="message-template-frm"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="name"
+             id="name"
+             type="text"
+             placeholder="Name">
+      <md-hint *ngIf="formErrors.name" [ngStyle]="{'color': 'red'}"> {{formErrors.name}}</md-hint>
+    </md-input-container>
+
+    <div layout="row" layout-align="space-between center">
+      <div flex>
+        <md-select placeholder="Substitution Variables" formControlName="substitutionVariables" class="w-full">
+          <md-option *ngFor="let variable of substitutionVariables" [value]="variable">
+            {{variable}}
+          </md-option>
+        </md-select>
+      </div>
+      <div class="w-60 text-right">
+        <a class="k-button k-primary" disabled>Insert
+        </a>
+      </div>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput
+                  required
+                  type="text"
+                  placeholder="Content"
+                  formControlName="content"
+                  #content></textarea>
+      <md-hint *ngIf="formErrors.content" [ngStyle]="{'color': 'red'}"> {{formErrors.content}}</md-hint>
+      <md-hint align="end" class="text-bold" [ngClass]="{'red-fg': contentPage() >= 2}">
+        <div>{{(contentLength * contentPage()) - content.value.length}} characters left</div>
+        <div *ngIf="contentPage() >= 2">
+          The content will be delivered as {{contentPage()}} messages
+        </div>
+      </md-hint>
+    </md-input-container>
+  </div>
+
+  <kendo-dialog-actions>
+    <a class="k-button" (click)="onCancel()">CANCEL</a>
+    <button class="k-button k-primary" [disabled]="!frm.valid || submitted">{{isNew ? 'CREATE' :
+      'UPDATE'}}
+    </button>
+  </kendo-dialog-actions>
+</form>

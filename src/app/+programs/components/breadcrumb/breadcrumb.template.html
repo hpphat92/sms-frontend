@@ -1,0 +1,70 @@
+<div class="custom-breadcrumb" layout="row" layout-align="start center" *ngIf="type === 'manage'">
+  <a class="arrow_box" [routerLink]="'/'">
+    <md-icon>home</md-icon>
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    TEXT MESSAGING
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    CAMPAIGNS
+  </a>
+  <a class="arrow_box"
+     *ngIf="programService.currentCampaign">
+    <span class="title">{{programService.currentCampaign.name}}</span>
+  </a>
+  <div class="arrow_box">
+    <span class="title">PROGRAMS</span>
+  </div>
+</div>
+
+<div class="custom-breadcrumb" layout="row" layout-align="start center"
+     *ngIf="type === 'opt-in'">
+  <a class="arrow_box" [routerLink]="'/'">
+    <md-icon>home</md-icon>
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    TEXT MESSAGING
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    CAMPAIGNS
+  </a>
+  <a class="arrow_box" [routerLink]="['/campaigns',programService.currentCampaign._id, 'programs']"
+     *ngIf="programService.currentCampaign">
+    <span class="title">{{programService.currentCampaign.name}}</span>
+  </a>
+  <a class="arrow_box"
+     [routerLink]="['/campaigns',programService.currentCampaign._id, 'programs']"
+     fragment="opt-in"
+     *ngIf="programService.currentCampaign">
+    <span class="title">OPT-IN PROGRAMS</span>
+  </a>
+  <div class="arrow_box">
+    <span class="title">{{action === 'create' ? 'CREATE' : 'EDIT'}}</span>
+  </div>
+</div>
+
+<div class="custom-breadcrumb" layout="row" layout-align="start center"
+     *ngIf="type === 'broadcast'">
+  <a class="arrow_box" [routerLink]="'/'">
+    <md-icon>home</md-icon>
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    TEXT MESSAGING
+  </a>
+  <a class="arrow_box" [routerLink]="'/campaigns'">
+    CAMPAIGNS
+  </a>
+  <a class="arrow_box" [routerLink]="['/campaigns',programService.currentCampaign._id, 'programs']"
+     *ngIf="programService.currentCampaign">
+    <span class="title">{{programService.currentCampaign.name}}</span>
+  </a>
+  <a class="arrow_box"
+     [routerLink]="['/campaigns',programService.currentCampaign._id, 'programs']"
+     fragment="broadcast"
+     *ngIf="programService.currentCampaign">
+    <span class="title">BROADCAST PROGRAMS</span>
+  </a>
+  <div class="arrow_box">
+    <span class="title">{{action === 'create' ? 'CREATE' : 'EDIT'}}</span>
+  </div>
+</div>

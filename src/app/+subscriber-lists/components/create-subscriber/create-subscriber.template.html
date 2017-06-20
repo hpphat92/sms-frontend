@@ -1,0 +1,137 @@
+<form id="form-login"
+      [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <div flex="1" layout="row" layout-align="start start">
+      <div style="margin-right: 5px" flex="1">
+        <span class="md-title">&nbsp;</span>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput required
+                 id="mobile"
+                 type="text"
+                 [textMask]="{mask: mask}"
+                 formControlName="mobile"
+                 placeholder="Mobile No">
+          <md-hint *ngIf="formErrors.mobile" [ngStyle]="{'color': 'red'}"> {{formErrors.mobile}}</md-hint>
+        </md-input-container>
+
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 id="email"
+                 type="text"
+                 formControlName="email"
+                 placeholder="Email">
+          <md-hint *ngIf="formErrors.email" [ngStyle]="{'color': 'red'}"> {{formErrors.email}}</md-hint>
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="name"
+                 id="name"
+                 type="text"
+                 placeholder="Name">
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="voice"
+                 id="voiceNo"
+                 type="text"
+                 placeholder="Voice No">
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="address1"
+                 id="address1"
+                 type="text"
+                 placeholder="Address 1">
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="address2"
+                 id="address2"
+                 type="text"
+                 placeholder="Address 2">
+
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="city"
+                 id="city"
+                 type="text"
+                 placeholder="City">
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="state"
+                 id="state"
+                 type="text"
+                 placeholder="State">
+        </md-input-container>
+        <md-input-container class="md-block" md-no-float>
+          <input mdInput
+                 formControlName="postal"
+                 id="postal"
+                 type="text"
+                 placeholder="Postal Code">
+          <md-hint *ngIf="formErrors.postal" [ngStyle]="{'color': 'red'}"> {{formErrors.postal}}</md-hint>
+        </md-input-container>
+        <div>
+          <md-select placeholder="Country" formControlName="country" class="w-full">
+            <md-option *ngFor="let country of countryList" [value]="country.name">
+              {{country.name}}
+            </md-option>
+          </md-select>
+        </div>
+        <div>
+          <md-select placeholder="Language" formControlName="language" class="w-full">
+            <md-option *ngFor="let language of languageList" [value]="language.english">
+              {{language.english}}
+            </md-option>
+          </md-select>
+        </div>
+        <div>
+          <md-select placeholder="Timezone" formControlName="timezone" class="w-full">
+            <md-option *ngFor="let timezone of timezoneList" [value]="timezone.text">
+              {{timezone.text}}
+            </md-option>
+          </md-select>
+        </div>
+        <div>
+          <md-input-container class="md-block" md-no-float>
+            <input mdInput
+                   readonly
+                   type="text"
+                   value="To be set by the system"
+                   placeholder="Carrier">
+          </md-input-container>
+          <md-select placeholder="Status" formControlName="status" class="w-full">
+            <md-option *ngFor="let status of statusList" [value]="status.value">
+              {{status.text}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+      <div style="margin-left: 5px" flex="1">
+
+        <span class="md-title">&nbsp;</span>
+        <span class="md-title">Custom variables</span>
+
+        <!--this place for new control -->
+        <md-input-container *ngFor="let name of newControlNames" class="md-block" md-no-float>
+          <input mdInput
+                 [formControlName]="name"
+                 [id]="name"
+                 type="text"
+                 [placeholder]="name">
+        </md-input-container>
+
+
+      </div>
+    </div>
+  </div>
+  <kendo-dialog-actions>
+    <button class="k-button" (click)="onCancel($event)">CANCEL</button>
+    <button class="k-button k-primary" [disabled]="!frm.valid || submitted">CREATE
+    </button>
+  </kendo-dialog-actions>
+</form>

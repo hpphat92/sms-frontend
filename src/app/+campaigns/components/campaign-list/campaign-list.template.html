@@ -1,0 +1,62 @@
+<kendo-grid
+  [data]="view | async"
+  [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+  [pageable]="true" [sortable]="false"
+  (dataStateChange)="onStateChange($event)">
+  <kendo-grid-toolbar>
+    <div layout="row" layout-align="space-between start">
+      <div class="flex">
+        <button kendoButton [primary]="true" (click)="addHandler()">
+          <md-icon><i class="material-icons">add</i></md-icon>
+          CREATE NEW CAMPAIGN
+        </button>
+      </div>
+      <div class="input-search-wrapper">
+        <i class="material-icons">search</i>
+        <input id="search" type="text"
+               [formControl]="searchText"
+               class="w-full">
+      </div>
+    </div>
+  </kendo-grid-toolbar>
+  <kendo-grid-column field="name" title="NAME" [sortable]="false"></kendo-grid-column>
+  <kendo-grid-column title="OPT-IN PROG" [sortable]="false" [width]="120">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.optin_count || 0}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="KEYWORDS" [sortable]="false" [width]="120">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.keyword_count || 0}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="BROADCAST PROG" [sortable]="false" [width]="150">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.broadcast_count || 0}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="SUBSCRIBERS" [sortable]="false" [width]="120">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.broadcasted || 0}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-command-column title="COMMAND" width="250">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <button class="md-icon-button md-button" md-tooltip="MANAGE" (click)="manageCampaign(dataItem)">
+        <md-icon><i class="material-icons">question_answer</i></md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="NEW BROADCAST" (click)="newBroadcast(dataItem)">
+        <md-icon><i class="material-icons">textsms</i></md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="EDIT" (click)="editHandler(dataItem)">
+        <md-icon><i class="material-icons">mode_edit</i></md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="ARCHIVE" (click)="archiveCampaign(dataItem)">
+        <md-icon><i class="material-icons">archive</i></md-icon>
+      </button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

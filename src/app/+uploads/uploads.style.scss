@@ -1,0 +1,13 @@
+uploads {
+  display: block;
+
+  .custom-upload {
+    input {
+      display: none;
+    }
+  }
+
+  .upload-content-page {
+    min-height: 66vh !important;
+  }
+}

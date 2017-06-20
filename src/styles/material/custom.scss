@@ -1,0 +1,38 @@
+/*************
+COMMON
+ *************/
+input[disabled], button[disabled] {
+  cursor: no-drop;
+}
+
+/************************************
+MENU
+ *************************************/
+
+.mat-menu-panel {
+  .mat-menu-content {
+    .mat-menu-item {
+      span {
+        color: rgba(0, 0, 0, 0.87);
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+textarea.mat-input-element {
+  min-height: 80px;
+  overflow-y: visible;
+}
+
+.k-dialog {
+  max-width: 450px;
+}
+.k-dialog-wrapper .k-dialog{position:fixed !important;}
+
+/* MD-CONTENT */
+md-content{
+  background-color: #fff;
+}

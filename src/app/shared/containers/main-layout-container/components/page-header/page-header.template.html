@@ -1,0 +1,118 @@
+<div id="toolbar">
+  <div class="top-row" layout="row" layout-align="space-between center">
+    <div layout="row" layout-align="start center">
+      <div class="navigation-toggle" hide-gt-sm layout="row" layout-align="center center"
+           (click)="toggleMobileSideNav()">
+        <button md-icon-button>
+          <md-icon>menu</md-icon>
+        </button>
+      </div>
+
+      <back-button *ngIf="enableBack"></back-button>
+
+      <div class="logo" layout="row" layout-align="start center">
+        <a class="logo-image" layout="row" layout-align="start center" routerLink="">
+          <img src="assets/images/logos/PHEAA_logo.svg"/>
+        </a>
+        <span class="logo-text">MOBILE MESSAGING SYSTEM</span>
+      </div>
+    </div>
+
+    <div layout="row" layout-align="start center">
+      <div id="horizontal-navigation">
+        <div layout="row" layout-align="start center">
+          <div class="ms-navigation-horizontal">
+            <div class="navigation-toggle" hide-gt-sm (click)="toggleMobileSideNav()" layout="row"
+                 layout-align="start center">
+              <button md-icon-button>
+                <md-icon>close</md-icon>
+              </button>
+            </div>
+
+            <ul class="horizontal">
+              <li class="ms-navigation-horizontal-node group " *ngFor="let menu of menus"
+                  [ngClass]="{'has-children': menu.subMenus}">
+                <div layout="row" class="ms-navigation-horizontal-item layout-row"
+                     [ngClass]="{'expanded': menu.expanded}">
+                  <a class="ms-navigation-horizontal-button"
+                     [ngClass]="{'active md-primary-bg md-primary-fg' : menu.isActive}"
+                     (click)="expandMenu(menu)">
+                    <span class="title" flex="">{{menu.name}}</span>
+                    <md-icon hide-gt-sm *ngIf="menu.subMenus && !menu.expanded"
+                             [ngClass]="{'md-primary-fg' : menu.isActive}">
+                      keyboard_arrow_right
+                    </md-icon>
+                    <md-icon hide-gt-sm *ngIf="menu.subMenus && menu.expanded"
+                             [ngClass]="{'md-primary-fg' : menu.isActive}">
+                      keyboard_arrow_down
+                    </md-icon>
+                  </a>
+                </div>
+
+                <ul *ngIf="menu.subMenus">
+                  <li class="ms-navigation-horizontal-node" *ngFor="let subMenu of menu.subMenus">
+                    <div layout="row" class="ms-navigation-horizontal-item">
+                      <a class="ms-navigation-horizontal-button"
+                         [ngClass]="{'active md-primary-bg md-primary-fg' : subMenu.isActive}"
+                         (click)="toggleMobileSideNav()" [routerLink]="subMenu.link">
+                        <span class="title" flex>{{subMenu.name}}</span>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="ms-navigation-horizontal-node group">
+                <div layout="row" class="ms-navigation-horizontal-item layout-row">
+                  <a class="ms-navigation-horizontal-button"
+                     href="mailto:support@emergerhealth.com?Subject=SMS%20Platform%20Support">
+                    <span class="title" flex="">SUPPORT</span>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <md-toolbar id="user-menu" layout="row" class="md-default-theme md-menu-toolbar">
+        <div>
+          <button md-button class="user-button" [mdMenuTriggerFor]="menu">
+            <div layout="row" layout-align="space-between center">
+              <div class="avatar-wrapper">
+                <img class="avatar" src="{{userContext.currentUser.picture}}">
+              </div>
+              <span class="username" hide-sm>{{userContext.currentUser.nickname}}</span>
+              <md-icon class="s16" hide-sm>keyboard_arrow_down</md-icon>
+            </div>
+          </button>
+          <md-menu #menu="mdMenu" [overlapTrigger]="false" class="user-menu-dropdown">
+            <a md-menu-item class="md-indent" layout="row" layout-align="start">
+              <md-icon>person</md-icon>
+              <span>MY PROFILE</span>
+            </a>
+
+            <mat-menu-divider></mat-menu-divider>
+
+            <a md-menu-item class="md-indent" [routerLink]="['/remote-database']" *ngIf="isAdministratorOrManager()">
+              <md-icon>settings</md-icon>
+              <span>SETTINGS</span>
+            </a>
+
+            <a md-menu-item class="md-indent" [routerLink]="['/users']" *ngIf="isAdministratorOrManager()">
+              <md-icon>people</md-icon>
+              <span>USERS</span>
+            </a>
+
+            <a md-menu-item class="md-indent" (click)="logout()">
+              <md-icon>lock_open</md-icon>
+              <span>LOGOUT</span>
+            </a>
+          </md-menu>
+        </div>
+      </md-toolbar>
+    </div>
+  </div>
+</div>
+
+<router-outlet name='breadcrumb'></router-outlet>
+

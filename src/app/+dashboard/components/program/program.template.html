@@ -1,0 +1,85 @@
+<div class="widget-group" layout="row" flex="100" layout-wrap="">
+  <div layout="column" flex="100" flex-gt-sm="33"
+       class="ms-widget">
+    <div class="md-dark-primary-bg white-fg ms-widget-front">
+      <div class="md-primary-bg p-8" layout="row"
+           layout-align="space-between center">
+        <div layout="row" layout-align="start center">
+          <div class="h3 font-size-18">Summary</div>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-between start" class="p-16 mt-8">
+
+        <div flex="30" class="text-center">
+          <div class="program-box">{{other.campaignTotal}}</div>
+          <div class="mt-5">CAMPAIGNS</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{other.mailListsTotal}}</div>
+          <div class="mt-5">LISTS</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{other.subscriberTotal}}</div>
+          <div class="mt-5">SUBSCRIBERS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div layout="column" flex="100" flex-gt-sm="33"
+       class="ms-widget">
+    <div class="md-dark-accent-bg white-fg ms-widget-front">
+      <div class="md-accent-bg white-fg p-8" layout="row"
+           layout-align="space-between center">
+        <div layout="row" layout-align="start center">
+          <div class="h3 font-size-18">Opt-in programs</div>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-between start" class="p-16 mt-8">
+
+        <div flex="30" class="text-center">
+          <div class="program-box">{{opInProgram.liveProgramTotal}}</div>
+          <div class="mt-5">LIVE</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{opInProgram.keywordTotal}}</div>
+          <div class="mt-5">KEYWORDS</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{opInProgram.stagedProgramTotal}}</div>
+          <div class="mt-5">STAGED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div layout="column" flex="100" flex-gt-sm="33"
+       class="ms-widget">
+    <div class="md-dark-warn-bg white-fg ms-widget-front">
+      <div class="md-warn-bg p-8" layout="row"
+           layout-align="space-between center">
+        <div layout="row" layout-align="start center">
+          <div class="h3 font-size-18">Broadcast Programs</div>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-between start" class="p-16 mt-8">
+
+        <div flex="30" class="text-center">
+          <div class="program-box">{{broadcastProgram.scheduledProgramTotal}}</div>
+          <div class="mt-5">SCHEDULED</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{broadcastProgram.recentTotal}}</div>
+          <div class="mt-5">RECENT</div>
+        </div>
+        <div flex="30" class="text-center">
+          <div class="program-box">{{broadcastProgram.stagedProgramTotal}}</div>
+          <div class="mt-5">STAGED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

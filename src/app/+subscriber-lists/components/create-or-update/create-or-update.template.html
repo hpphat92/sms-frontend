@@ -1,0 +1,52 @@
+<form id="form-login"
+      [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="subscriber-frm"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             #nameControl
+             formControlName="name"
+             id="name"
+             type="text"
+             placeholder="Name">
+      <md-hint *ngIf="formErrors.name" [ngStyle]="{'color': 'red'}"> {{formErrors.name}}</md-hint>
+    </md-input-container>
+
+    <div>
+      <md-select placeholder="Type" name="type" formControlName="type" class="w-full" [disabled]="!isNew">
+        <md-option *ngFor="let type of subscriberListTypes" [value]="type.id">
+          {{type.name}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <div *ngIf="frm.value.type === subscriberListTypes[1].id">
+      <md-select placeholder="Select Remote Database" name="remoteDB"
+                 formControlName="data_source_id"
+                 class="w-full">
+        <md-option *ngFor="let remote of remoteDB" [value]="remote._id">
+          {{remote.name}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput
+                  required
+                  type="text"
+                  placeholder="Description"
+                  formControlName="description"></textarea>
+      <md-hint *ngIf="formErrors.description" [ngStyle]="{'color': 'red'}"> {{formErrors.description}}</md-hint>
+    </md-input-container>
+  </div>
+
+  <kendo-dialog-actions>
+    <a class="k-button" (click)="onCancel($event)">CANCEL</a>
+    <button class="k-button k-primary"
+            [disabled]="!frm.valid || submitted">{{isNew ? 'CREATE' :
+      'UPDATE'}}
+    </button>
+  </kendo-dialog-actions>
+</form>

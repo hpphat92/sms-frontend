@@ -1,0 +1,29 @@
+<div class="ms-widget">
+  <div class="white-bg ms-widget-front">
+
+    <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+      <div class="h3">Recent Campaigns</div>
+    </div>
+
+    <div class="ms-widget" *ngFor="let c of data">
+      <div class="white-bg ms-widget-front p-10">
+        <div layout="row" layout-fill="">
+          <div class="width-60 text-center mt-10" flex>
+            <i class="material-icons">wifi</i>
+          </div>
+          <div class="width-170" flex>
+            <div>Broadcast on</div>
+            <div>{{c.completed | myLocalTimes : 'MM/DD/YYYY hh:mm A'}}</div>
+            <div>Send to</div>
+            <div>{{c.delivered || 0}} subscribers</div>
+          </div>
+
+          <div flex>
+            <p>{{c.name}}</p>
+            <p>{{c.content}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

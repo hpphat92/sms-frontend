@@ -1,0 +1,19 @@
+privacy-policy{
+  .title{
+    display: flex; flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center
+  }
+  .content{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: 14px;
+    padding: 0 80px;
+  }
+  .intro{
+    font-weight: bold;
+    font-size: 25px;
+  }
+}

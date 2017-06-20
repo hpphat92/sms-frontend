@@ -1,0 +1,25 @@
+.input-search-wrapper {
+  position: relative;
+  width: 200px;
+  display: inline-block;
+
+  i {
+    position: absolute;
+    left: 5px;
+    line-height: 38px;
+  }
+
+  input {
+    padding-left: 30px !important;
+    height: 35px;
+  }
+}
+
+.col-name {
+  position: relative;
+  i {
+    position: absolute;
+    right: 0;
+    top: -2px;
+  }
+}

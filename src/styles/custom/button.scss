@@ -1,0 +1,35 @@
+button:disabled, .k-button:disabled {
+  cursor: not-allowed !important;
+  pointer-events: auto !important;
+}
+
+kendo-dialog-actions {
+  button.k-button:disabled {
+    color: #656565;
+    background-color: #f6f6f6;
+    background-image: -webkit-linear-gradient(#f6f6f6, #f1f1f1);
+    background-image: linear-gradient(#f6f6f6, #f1f1f1);
+  }
+
+  button.k-button.k-primary:disabled:hover {
+    background: none !important;
+    color: $accent;
+  }
+}
+
+a.k-button {
+  color: #656565 !important;
+}
+
+a.k-button.k-primary {
+  color: #fff !important;
+}
+
+.k-button.k-bare {
+  color: inherit !important;
+}
+
+.k-button {
+  text-transform: uppercase;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}

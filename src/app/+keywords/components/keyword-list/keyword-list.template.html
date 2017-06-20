@@ -1,0 +1,52 @@
+<kendo-grid
+  [data]="view | async"
+  [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+  [pageable]="true" [sortable]="false"
+  (dataStateChange)="onStateChange($event)">
+  <kendo-grid-toolbar>
+    <div layout="row" layout-align="space-between start">
+      <div class="flex">
+        <button kendoButton [primary]="true" (click)="addHandler()">
+          <md-icon><i class="material-icons">add</i></md-icon>
+          RESERVE KEYWORD
+        </button>
+      </div>
+      <div class="input-search-wrapper">
+        <i class="material-icons">search</i>
+        <input id="search" type="text" class="w-full" [formControl]="searchText">
+      </div>
+    </div>
+  </kendo-grid-toolbar>
+  <kendo-grid-column title="STATUS" [sortable]="false" [width]="140">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <span class="text-boxed m-0 white-fg text-uppercase" [ngClass]="{'pink-bg' : dataItem.status ==='Pending Removal',
+      'deep-orange-bg' : dataItem.status ==='Reserved', 'light-blue-bg' : dataItem.status ==='Released'}">{{dataItem.status }}</span>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="_id" title="KEYWORD" [sortable]="false"></kendo-grid-column>
+  <kendo-grid-column field="shortcode" title="SHORTCODE" [sortable]="false" [width]="120"></kendo-grid-column>
+  <kendo-grid-column title="CAMPAIGN" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.codes[0]?.campaign}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="OPT-IN PROGRAM" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.codes[0]?.program}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-command-column title="COMMAND" width="150">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <button class="md-icon-button md-button" md-tooltip="RELEASE" (click)="releaseKeyword(dataItem)"
+              [hidden]="dataItem.status !== 'Reserved'">
+        <md-icon><i class="material-icons">remove_circle</i>
+        </md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="REMOVE" (click)="removeKeyword(dataItem)"
+              [hidden]="dataItem.status !== 'Reserved' && dataItem.status !== 'Released'">
+        <md-icon><i class="material-icons">delete</i></md-icon>
+      </button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

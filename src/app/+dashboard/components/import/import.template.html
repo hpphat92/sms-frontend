@@ -1,0 +1,31 @@
+<div class="ms-widget">
+  <div class="white-bg ms-widget-front">
+
+    <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+      <div class="h3 ng-binding">Recent Imports</div>
+    </div>
+
+    <div class="ms-widget">
+      <div class="white-bg ms-widget-front">
+        <div class="ph-16 pv-15 border-bottom" layout="row"
+             layout-align="start center"
+             *ngFor="let im of imports">
+          <div class="icon pr-16 mr-16 mt-5 border-right green-fg">
+            <i class="material-icons" *ngIf="im.status === 'completed'">check_circle</i>
+            <i class="material-icons" *ngIf="im.status !== 'completed'">highlight_off</i>
+          </div>
+          <div class="h4 text-bold flex" flex="">
+            {{im.file_name}} | {{im.start_date | myLocalTimes : 'MM/DD/YYYY hh:mm A'}} | {{im.imported || 0}}
+            SUBSCRIBERS
+          </div>
+        </div>
+
+        <!--<div class="ph-16 pv-15 border-bottom" layout="row"-->
+        <!--layout-align="start center">-->
+        <!--<div class="icon pr-16 mr-16 mt-5 border-right red-fg"><i class="material-icons">highlight_off</i></div>-->
+        <!--<div class="h4 text-bold flex" flex="">AES_Users1.csv | 03/24/2017 10:30am EST | 0 SUBSCRIBERS</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</div>

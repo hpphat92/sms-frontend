@@ -1,0 +1,41 @@
+<div layout="row" layout-wrap layout-align="start center">
+  <div flex="50" class="ms-widget">
+    <div class="white-bg ms-widget-front">
+      <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+        <div class="h3 ng-binding">Daily Statistics</div>
+      </div>
+
+      <div class="widget-group" layout="row" flex="100" layout-wrap="">
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Outgoing'" [number]="dailyStatistic.outbound"></widget>
+        </div>
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Incoming'" [number]="dailyStatistic.inbound" [titleColor]="'red-fg'"></widget>
+        </div>
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Total'" [number]="dailyStatistic.total" [titleColor]="'orange-fg'"></widget>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div flex="50" class="ms-widget">
+    <div class="white-bg ms-widget-front">
+      <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+        <div class="h3">Month-to-date statistics</div>
+      </div>
+
+      <div class="widget-group" layout="row" flex="100" layout-wrap="">
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Outgoing'" [number]="monthToDateStatistic.outbound"></widget>
+        </div>
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Incoming'" [number]="monthToDateStatistic.inbound" [titleColor]="'red-fg'"></widget>
+        </div>
+        <div layout="column" flex="100" flex-gt-sm="33">
+          <widget [title]="'Total'" [number]="monthToDateStatistic.total" [titleColor]="'orange-fg'"></widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

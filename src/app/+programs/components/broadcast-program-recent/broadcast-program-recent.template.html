@@ -1,0 +1,42 @@
+<kendo-grid
+  [data]="view"
+  [pageSize]="gridState.take"
+  [skip]="gridState.skip"
+  [sort]="gridState.sort"
+  [pageable]="true"
+  [sortable]="false"
+  (dataStateChange)="onStateChange($event)">
+  <kendo-grid-toolbar>
+    <div layout="row" layout-align="space-between start">
+      <div class="flex">
+        <button kendoButton [primary]="true" (click)="addHandler()">
+          <md-icon><i class="material-icons">add</i></md-icon>
+          CREATE NEW BROADCAST PROGRAM
+        </button>
+      </div>
+      <div class="input-search-wrapper">
+        <i class="material-icons">search</i>
+        <input id="search-staged" type="text" [formControl]="searchText"
+               class="w-full">
+      </div>
+    </div>
+  </kendo-grid-toolbar>
+  <!--<kendo-grid-column field="id" title="ID" width="50" [sortable]="true">-->
+  <!--<ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
+  <!--<a href="javascript:void(0)">{{dataItem.id}}</a>-->
+  <!--</ng-template>-->
+  <!--</kendo-grid-column>-->
+
+  <kendo-grid-column field="name" title="Name" [sortable]="true"></kendo-grid-column>
+  <kendo-grid-column title="Delivered Time" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{ (dataItem.schedule_date ? dataItem.schedule_date : dataItem.schedule?.start) | date :
+      appConstant.format.fullDate}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="Total Subscribers" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{ dataItem.delivered || 0}}
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>

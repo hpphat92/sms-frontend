@@ -1,0 +1,79 @@
+<form id="form-login"
+      [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="frm"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="name"
+             id="name"
+             type="text"
+             placeholder="Name">
+      <md-hint *ngIf="formErrors.name" [ngStyle]="{'color': 'red'}"> {{formErrors.name}}</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput required
+                  type="text"
+                  placeholder="Description"
+                  formControlName="description"></textarea>
+      <md-hint *ngIf="formErrors.description" [ngStyle]="{'color': 'red'}"> {{formErrors.description}}</md-hint>
+    </md-input-container>
+
+    <div *ngIf="isNew">
+      <md-select placeholder="Subscriber List" formControlName="list_id" class="w-full" required>
+        <md-option value="New">
+          Create New Local List
+        </md-option>
+        <md-divider class="has-text">Local</md-divider>
+        <md-option [value]="item._id" *ngFor="let item of subscriberListList | filterBy:{remote:false}">
+          {{item.name}}
+        </md-option>
+        <md-divider class="has-text">Remote</md-divider>
+        <md-option [value]="item._id" *ngFor="let item of subscriberListList | filterBy:{remote:true}">
+          {{item.name}}
+        </md-option>
+      </md-select>
+      <md-hint *ngIf="formErrors.list_id" [ngStyle]="{'color': 'red'}"> {{formErrors.list_id}}</md-hint>
+    </div>
+    <div layout="row" layout-align="space-between center" *ngIf="!isNew">
+      <div class="flex">Subscriber List</div>
+      <span><span class="mr-10">{{subscriberList? subscriberList.name : 'Unknown'}}</span><md-icon
+        *ngIf="subscriberList?.remote"><i
+        class="material-icons">cloud</i></md-icon></span>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput
+                  #helpMessage
+                  required
+                  maxlength="160"
+                  type="text"
+                  placeholder="Help message"
+                  formControlName="help_msg"></textarea>
+      <md-hint *ngIf="formErrors.help_msg" [ngStyle]="{'color': 'red'}"> {{formErrors.help_msg}}</md-hint>
+      <md-hint align="end">{{160 - helpMessage.value.length}} characters left</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput
+                  required
+                  #stopMessage
+                  maxlength="160"
+                  type="text"
+                  placeholder="Stop message"
+                  formControlName="stop_msg"></textarea>
+      <md-hint *ngIf="formErrors.stop_msg" [ngStyle]="{'color': 'red'}"> {{formErrors.stop_msg}}</md-hint>
+      <md-hint align="end">{{160 - stopMessage.value.length}} characters left</md-hint>
+    </md-input-container>
+
+  </div>
+  <kendo-dialog-actions>
+    <a href="javascript:void(0)" class="k-button" (click)="onCancel()">CANCEL</a>
+    <button class="k-button k-primary" [disabled]="!frm.valid || submitted">{{isNew ? 'CREATE' :
+      'UPDATE'}}
+    </button>
+  </kendo-dialog-actions>
+
+</form>

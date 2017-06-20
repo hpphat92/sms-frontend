@@ -1,0 +1,41 @@
+<div class="page-layout blank">
+  <div class="ms-widget">
+    <div class="white-bg ms-widget-front">
+
+      <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+        <div class="h3">MANAGING: {{currentCampaign?.name}}</div>
+      </div>
+
+      <div class="ph-16 pv-15 border-bottom"
+           layout="row"
+           layout-align="start center">
+        <div class="h4 text-bold flex w-200" flex="">Description:</div>
+        <div class="h4 ng-binding" flex>
+          {{currentCampaign?.description}}
+        </div>
+      </div>
+
+      <div class="ph-16 pv-15 border-bottom"
+           layout="row"
+           layout-align="start center">
+        <div class="h4 text-bold flex w-200" flex="">Keywords:</div>
+        <div class="h4" flex>
+          {{'(' + listKeyword?.length + ')'}} {{listKeyword.length ? listKeyword?.join(', ') : ''}}
+        </div>
+      </div>
+
+      <div class="ph-16 pv-15"
+           layout="row"
+           layout-align="start center">
+        <div class="h4 text-bold flex w-200" flex="">Active Subscribers:</div>
+        <div class="h4" flex>
+          {{currentCampaign?.broadcasted ? currentCampaign?.broadcasted : 0}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <opt-in-program [campaignId]="campaignId"></opt-in-program>
+
+  <broadcast-program [campaignId]="campaignId"></broadcast-program>
+</div>

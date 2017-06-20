@@ -1,0 +1,21 @@
+<div class="ms-widget" id="broadcast">
+  <div class="white-bg ms-widget-front">
+
+    <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+      <div class="h3">BROADCAST PROGRAMS</div>
+    </div>
+    <md-tab-group>
+      <md-tab label="SCHEDULED">
+        <broadcast-program-scheduled [campaignId]="campaignId"></broadcast-program-scheduled>
+      </md-tab>
+
+      <md-tab label="RECENT">
+        <broadcast-program-recent [campaignId]="campaignId"></broadcast-program-recent>
+      </md-tab>
+
+      <md-tab label="STAGED">
+        <broadcast-program-staged [campaignId]="campaignId"></broadcast-program-staged>
+      </md-tab>
+    </md-tab-group>
+  </div>
+</div>

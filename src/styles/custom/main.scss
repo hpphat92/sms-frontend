@@ -1,0 +1,12 @@
+.message-content-restrict {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40ch; // force only display 40 characters
+  cursor: pointer;
+}
+
+.text-boxed {
+  width: auto !important;
+  min-width: 100px;
+}

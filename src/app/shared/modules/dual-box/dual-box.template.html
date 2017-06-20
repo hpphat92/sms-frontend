@@ -1,0 +1,57 @@
+<!-- Default template -->
+<ng-template #db let-item="item">
+  {{item}}
+</ng-template>
+
+<div class="dual-box-container" layout="row" layout-align="start center">
+  <div class="left-box" flex="1">
+    <div class="md-no-sticky md-subheader _md md-default-theme">
+      <div class="md-subheader-inner">
+        <div class="md-subheader-content">{{leftTitle}}</div>
+      </div>
+    </div>
+    <div class="list-box">
+      <md-list class="md-list-hover">
+        <ng-template ngFor [ngForOf]="clonedSource" let-item let-idx="index">
+          <md-list-item class="has-divider" (click)="select(clonedSource, item, idx, 'left')"
+                        [ngClass]="{'md-accent-bg selected': item.__selected}">
+            <ng-template [ngTemplateOutlet]="template || db"
+                         [ngOutletContext]="{item: item}"></ng-template>
+          </md-list-item>
+        </ng-template>
+      </md-list>
+    </div>
+  </div>
+  <div class="item-controls" layout="column" layout-align="center center">
+    <button type="button" md-icon-button (click)="addToRight()" [disabled]="!leftSelectedItem.length">
+      <md-icon>keyboard_arrow_right</md-icon>
+    </button>
+    <button type="button" md-icon-button (click)="addToLeft()" [disabled]="!rightSelectedItem.length">
+      <md-icon>keyboard_arrow_left</md-icon>
+    </button>
+    <button type="button" md-icon-button (click)="addAllToRight()" [disabled]="!clonedSource || !clonedSource.length">
+      <md-icon fontSet="fontawesome" fontIcon="fa-angle-double-right"></md-icon>
+    </button>
+    <button type="button" md-icon-button (click)="addAllToLeft()" [disabled]="!selected || !selected.length">
+      <md-icon fontSet="fontawesome" fontIcon="fa-angle-double-left"></md-icon>
+    </button>
+  </div>
+  <div class="right-box" flex="1">
+    <div class="md-no-sticky md-subheader _md md-default-theme">
+      <div class="md-subheader-inner">
+        <div class="md-subheader-content">{{rightTitle}}</div>
+      </div>
+    </div>
+    <div class=" list-box">
+      <md-list class="md-list-hover">
+        <ng-template ngFor [ngForOf]="selected" let-item let-idx="index">
+          <md-list-item class="has-divider" (click)="select(selected, item, idx, 'right')"
+                        [ngClass]="{'md-accent-bg selected': item.__selected}">
+            <ng-template [ngTemplateOutlet]="template || db"
+                         [ngOutletContext]="{item: item}"></ng-template>
+          </md-list-item>
+        </ng-template>
+      </md-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="page-layout blank upload-content-page">
+  <div class="ms-widget">
+    <div class="white-bg ms-widget-front">
+      <form id="upload-frm"
+            [formGroup]="frm"
+            (ngSubmit)="upload(frm.value)"
+            name="upload-frm"
+            novalidate="">
+
+        <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+          <div flex="100" class="h3">Upload File</div>
+
+          <button class="k-button k-primary" [disabled]="frm.invalid || isWaiting || !uploader.queue.length">
+            {{isWaiting? 'PLEASE WAIT...' : 'UPLOAD'}}
+          </button>
+        </div>
+
+        <div class="widget-group p-16">
+          <div>
+            <md-select placeholder="Subscriber List" class="w-full" formControlName="list_id" required="">
+              <md-option *ngFor="let subscriberList of subscriberLists" [value]="subscriberList._id">
+                {{subscriberList.name}}
+              </md-option>
+            </md-select>
+            <md-hint *ngIf="formErrors.list_id" [ngStyle]="{'color': 'red'}"> {{formErrors.list_id}}</md-hint>
+          </div>
+
+          <div class="custom-upload">
+            <input type="file"
+                   ng2FileSelect
+                   [accept]="options.accept"
+                   [uploader]="uploader"
+                   #fileUpload (change)="onChange($event)"/>
+
+            <button class="k-button k-primary" (click)="fileUpload.click()">BROWSE...</button>
+            <span class="ml-10">{{uploader.queue.length ? '"' + fileName + '"' : 'No file selected'}}</span>
+          </div>
+        </div>
+      </form>
+
+      <p class="p-16">Note: File must be under 3GB in size and be submitted in the comma-delimited (.csv), text(.txt) or
+        Excel(.xls, .xlsx) format.
+        For the sample format including headers <a href="./assets/data/example.csv" download="example.csv">click here</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<form [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="frm"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="firstName"
+             id="firstName"
+             type="text"
+             placeholder="First Name">
+      <md-hint *ngIf="formErrors.firstName" [ngStyle]="{'color': 'red'}"> {{formErrors.firstName}}</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="lastName"
+             id="lastName"
+             type="text"
+             placeholder="Last Name">
+      <md-hint *ngIf="formErrors.lastName" [ngStyle]="{'color': 'red'}"> {{formErrors.lastName}}</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="phoneNumber"
+             [textMask]="{mask: mask}"
+             id="mobile-no"
+             type="tel"
+             placeholder="Mobile No">
+      <md-hint *ngIf="formErrors.phoneNumber" [ngStyle]="{'color': 'red'}"> {{formErrors.phoneNumber}}</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="email"
+             id="email"
+             type="email"
+             placeholder="Email">
+      <md-hint *ngIf="formErrors.email" [ngStyle]="{'color': 'red'}"> {{formErrors.email}}</md-hint>
+    </md-input-container>
+
+    <div>
+      <md-select placeholder="Role" formControlName="role" class="w-full" required="">
+        <md-option *ngFor="let r of roleList" [value]="r">
+          {{r}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required="{{isNew ? 'required' : false}}"
+             formControlName="password"
+             id="password"
+             type="password"
+             placeholder="Password">
+      <md-hint *ngIf="formErrors.password" [ngStyle]="{'color': 'red'}"> {{formErrors.password}}</md-hint>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required="{{isNew ? 'required' : false}}"
+             formControlName="confirm"
+             id="confirm"
+             type="password"
+             placeholder="Confirm">
+      <md-hint *ngIf="formErrors.confirm" [ngStyle]="{'color': 'red'}"> {{formErrors.confirm}}</md-hint>
+    </md-input-container>
+
+    <div>
+      <md-select placeholder="Timezone" formControlName="timezone" class="w-full">
+        <md-option *ngFor="let timezone of timezoneList" [value]="timezone.text">
+          {{timezone.text}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput
+             name="photoUrl"
+             formControlName="photoUrl"
+             id="photo-url"
+             type="text"
+             placeholder="Photo Url">
+      <md-hint *ngIf="frm.get('photoUrl').hasError('imageInvalid') && frm.get('photoUrl').dirty"
+               [ngStyle]="{'color': 'red'}">
+        {{validationMessages.photoUrl.imageInvalid}}
+      </md-hint>
+    </md-input-container>
+  </div>
+
+  <kendo-dialog-actions>
+    <a href="javascript:void(0)" class="k-button" (click)="onCancel($event)">CANCEL</a>
+    <button class="k-button k-primary" [disabled]="!frm.valid || submitted">{{isNew ? 'CREATE' :
+      'UPDATE'}}
+    </button>
+  </kendo-dialog-actions>
+</form>

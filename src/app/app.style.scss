@@ -1,0 +1,41 @@
+.ps-container > .ps-scrollbar-y-rail {
+  z-index: 20;
+}
+
+ng-sidebar-container {
+  overflow: hidden;
+  ng-sidebar {
+    > aside {
+      position: fixed !important;
+    }
+  }
+}
+
+input:-webkit-autofill:focus {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+footer.footer {
+  text-align: center;
+  .separate-line {
+    margin: 0 10px;
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  footer.footer {
+    font-size: 10px;
+    .separate-line {
+      margin: 0 5px;
+    }
+
+  }
+}
+
+

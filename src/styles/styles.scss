@@ -1,0 +1,29 @@
+// Material 2 Theming funtions
+@import '~@angular/material/_theming.scss';
+// App Theme varibales
+@import 'theme/vars.scss';
+// AngularJS Material styles
+@import 'material/angular-material';
+
+// 3rd parties styles
+$font-size: 14px;
+$font-size-sm: 16px;
+$font-size-lg: 21px;
+$myAccent: map-get($theme, accent);
+$accent: mat-color($myAccent);
+
+@import "~@progress/kendo-theme-default/scss/all.scss";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~ngx-material-datepicker/lib/datepicker/styles.scss';
+@include calendar-theme($theme);
+@import '~ngx-toastr/toastr.css';
+@import '~nprogress/nprogress.css';
+@import '~ngx-perfect-scrollbar/dist/lib/perfect-scrollbar.component.css';
+
+// App Styles
+@import 'fonts';
+@import 'theme/global';
+@import 'utilities';
+@import './custom/index';
+@import "components/index";
+

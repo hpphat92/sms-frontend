@@ -1,0 +1,36 @@
+.ngx-md-datepicker-wrapper {
+  position: relative;
+  padding: 18px 0;
+  ngx-md-datepicker {
+    display: block;
+    md-input-container {
+      width: 100%;
+      margin: 0;
+
+      .mat-input-wrapper {
+        margin: 1em 0 0 0;
+      }
+    }
+  }
+
+  md-hint {
+    font-size: 12px;
+  }
+
+  .ng-dirty.ng-invalid {
+    .mat-input-underline {
+      border-color: #f44336;
+      .mat-input-ripple {
+        background-color: #f44336;
+      }
+    }
+
+    .mat-focused {
+      .mat-input-underline {
+        .mat-input-ripple {
+          background-color: #f44336;
+        }
+      }
+    }
+  }
+}

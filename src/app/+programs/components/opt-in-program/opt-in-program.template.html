@@ -1,0 +1,16 @@
+<div class="ms-widget" id="opt-in">
+  <div class="white-bg ms-widget-front">
+
+    <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+      <div class="h3">OPT-IN PROGRAMS</div>
+    </div>
+    <md-tab-group>
+      <md-tab label="LIVE">
+        <opt-in-program-live [campaignId]="campaignId"></opt-in-program-live>
+      </md-tab>
+      <md-tab label="STAGED">
+        <opt-in-program-staged [campaignId]="campaignId"></opt-in-program-staged>
+      </md-tab>
+    </md-tab-group>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<form id="form-login"
+      [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="subscriber-frm"
+      novalidate="">
+  <div class="dialog-scrollable">
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="name"
+             id="name"
+             type="text"
+             placeholder="Name">
+      <md-hint *ngIf="formErrors.name" [ngStyle]="{'color': 'red'}"> {{formErrors.name}}</md-hint>
+    </md-input-container>
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="database"
+             id="database"
+             type="text"
+             placeholder="Database Name">
+    </md-input-container>
+    <div>
+      <md-select placeholder="Database Type" required name="driver" formControlName="driver" class="w-full">
+        <md-option *ngFor="let type of databaseType" [value]="type">
+          {{type}}
+        </md-option>
+      </md-select>
+    </div>
+
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput
+             formControlName="user"
+             id="user"
+             type="text"
+             placeholder="User Name">
+    </md-input-container>
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput
+             formControlName="password"
+             id="password"
+             type="password"
+             placeholder="Password">
+    </md-input-container>
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput required
+             formControlName="host"
+             id="host"
+             type="text"
+             placeholder="Hostname">
+      <md-hint *ngIf="formErrors.host" [ngStyle]="{'color': 'red'}"> {{formErrors.host}}</md-hint>
+    </md-input-container>
+    <md-input-container class="md-block" md-no-float>
+      <input mdInput
+             form formControlName="port"
+             id="port"
+             type="text"
+             placeholder="Port">
+    </md-input-container>
+    <md-checkbox formControlName="ssl" aria-label="Checkbox 1">
+      Require SSL
+    </md-checkbox>
+    <md-input-container class="md-block" md-no-float>
+        <textarea mdInput
+                  formControlName="description"
+                  type="text"
+                  placeholder="Comment">
+        </textarea>
+    </md-input-container>
+  </div>
+  <kendo-dialog-actions>
+    <a class="k-button" (click)="onCancel()">CANCEL</a>
+    <button class="k-button k-primary" [disabled]="!frm.valid || submitted">{{isNew ? 'CREATE' :
+      'UPDATE'}}
+    </button>
+  </kendo-dialog-actions>
+</form>

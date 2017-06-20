@@ -1,0 +1,66 @@
+<kendo-grid
+  [data]="view | async"
+  [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+  [pageable]="true" [sortable]="false"
+  (dataStateChange)="onStateChange($event)">
+  <kendo-grid-toolbar>
+    <div layout="row" layout-align="space-between start">
+      <div class="flex">
+        <button kendoButton [primary]="true" (click)="addHandler()">
+          <md-icon><i class="material-icons">add</i></md-icon>
+          CREATE NEW SUBSCRIBER LIST
+        </button>
+      </div>
+      <div class="input-search-wrapper">
+        <i class="material-icons">search</i>
+        <input id="search" type="text" class="w-full"
+               [formControl]="searchText">
+      </div>
+    </div>
+  </kendo-grid-toolbar>
+
+  <kendo-grid-column field="name" title="LIST NAME" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <div class="col-name">
+        <div class="name" [ngClass]="{'pr-25': dataItem.remote}">{{dataItem.name}}</div>
+        <i class="material-icons" *ngIf="dataItem.remote">cloud</i>
+      </div>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="DESCRIPTION" [sortable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <div (click)="editHandler(dataItem)" class="message-content-restrict">{{dataItem.description}}</div>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="TYPE" [sortable]="false" [width]="75">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.remote ? subscriberListTypes[1].name : subscriberListTypes[0].name}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="SUBSCRIBERS" [sortable]="false" [width]="120">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.remote? '-' : dataItem.subscribers || 0}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-command-column title="COMMAND" width="250">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <button class="md-icon-button md-button" md-tooltip="VIEW SUBSCRIBER" (click)="viewSubscriber(dataItem)"
+              [hidden]="dataItem.remote">
+        <md-icon><i class="material-icons">person</i></md-icon>
+      </button>
+      <button class="md-icon-button md-button" md-tooltip="ADD SUBSCRIBER" (click)="addSubscriber(dataItem)"
+              [hidden]="dataItem.remote">
+        <md-icon><i class="material-icons">person_add</i></md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="EDIT" (click)="editHandler(dataItem)">
+        <md-icon><i class="material-icons">mode_edit</i></md-icon>
+      </button>
+
+      <button class="md-icon-button md-button" md-tooltip="DELETE" (click)="removeHandler(dataItem)">
+        <md-icon><i class="material-icons">delete</i></md-icon>
+      </button>
+
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

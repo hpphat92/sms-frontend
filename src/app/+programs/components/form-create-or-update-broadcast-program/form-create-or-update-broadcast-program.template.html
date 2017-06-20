@@ -1,0 +1,224 @@
+<div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+  <div class="h3">{{currentProgram ? 'EDIT' : 'NEW'}} BROADCAST PROGRAM {{currentProgram?.name}}</div>
+</div>
+
+<form [formGroup]="frm"
+      (ngSubmit)="onSave(frm.value)"
+      name="opt-in-programs-frm"
+      class="p-24"
+      novalidate="">
+
+  <md-input-container class="md-block" md-no-float>
+    <input mdInput required
+           formControlName="name"
+           id="name"
+           type="text"
+           placeholder="Name">
+    <md-hint *ngIf="formErrors.name" [ngStyle]="{'color': 'red'}"> {{formErrors.name}}</md-hint>
+  </md-input-container>
+
+  <div>
+    <md-select placeholder="Short Code" formControlName="code_id" class="w-full" required>
+      <md-option [value]="code._id" *ngFor="let code of shortCodes">
+        {{code.code}}
+      </md-option>
+    </md-select>
+  </div>
+
+  <div class="ms-widget ph-0">
+    <div class="white-bg ms-widget-front">
+
+      <div class="ph-16 pv-16 border-bottom md-primary-bg">
+        <div class="h3">Subscriber List
+          <md-icon *ngIf="currentSubscriberList?.remote"><i class="material-icons">cloud</i></md-icon>
+          : <span><b>{{currentSubscriberList?.name}}</b></span></div>
+      </div>
+
+      <div class="ph-16" *ngIf="currentSubscriberList?.remote">
+        <md-input-container class="md-block" md-no-float>
+        <textarea mdInput required
+                  type="text"
+                  placeholder="Sql Select Statement"
+                  formControlName="insert_sql"
+                  #content></textarea>
+        </md-input-container>
+
+        <md-input-container class="md-block" md-no-float>
+        <textarea mdInput required
+                  type="text"
+                  placeholder="Sql Select Statement"
+                  formControlName="select_sql"
+                  #content></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+
+  <div layout="row" layout-align="space-between start" layout-wrap="">
+    <div class="ms-widget ph-0 ph-0-xs" flex="50" flex-xs="100">
+      <div class="white-bg ms-widget-front">
+
+        <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+          <div class="h3">Conversation</div>
+
+          <a class="k-button k-primary" disabled>Add Message+</a>
+        </div>
+
+        <div layout="row" layout-align="center center">
+          <div class="iphone-bg mv-20">
+            <div id="chat-app">
+              <div id="chat-content">
+                <div class="chat-scrollable">
+                  <div class="pv-10 ph-5 message-row" layout="row" layout-align="center end">
+                    <i class="fa fa-comment avatar bubble-icon" aria-hidden="true"></i>
+                    <div class="bubble">
+                      <div class="message">
+
+                        <md-input-container md-no-float class=" md-blockmt-0 w-full">
+                      <textarea mdInput required
+                                mdTextareaAutosize
+                                #autosize="mdTextareaAutosize"
+                                #contentControl
+                                type="text"
+                                placeholder="Start typing your message..."
+                                formControlName="content"></textarea>
+                          <md-hint align="end" *ngIf="contentControl.value.length<=160" [ngStyle]="{'color': 'red'}">
+                            {{160
+                            -
+                            contentControl.value.length}} characters left
+                          </md-hint>
+                          <md-hint align="end" *ngIf="contentControl.value.length >160" [ngStyle]="{'color': 'red'}">
+                            This content will be sent in {{Math.ceil(contentControl.value.length / 160)}} messages
+                          </md-hint>
+                        </md-input-container>
+
+                        <div class="font-size-10 secondary-text">Recommended Text:</div>
+                        <p class="mv-5 font-size-12">Reply STOP to quit, HELP for info.Msg&DataRatesMayApply</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div layout="row" *ngIf="campaignsSelected.length"
+                       class="pv-10 ph-5 message-row user" layout-align="center end">
+                    <img class="avatar"
+                         src="assets/images/avatars/profile.jpg">
+                    <div class="bubble">
+                      <div *ngFor="let campaign of campaignsSelected">
+                        {{campaign.name}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ms-widget ph-0 ph-0-xs" flex="50" flex-xs="100">
+      <div class="white-bg ms-widget-front">
+
+        <div class="ph-16 pv-16 border-bottom md-primary-bg" layout="row" layout-align="space-between center">
+          <div class="h3">Schedule</div>
+        </div>
+
+        <div class="p-16">
+          <div>
+            <md-select placeholder="Type" formControlName="scheduleType" class="w-full">
+              <md-option [value]="item.id" *ngFor="let item of scheduleTypeList;">
+                {{item.name}}
+              </md-option>
+            </md-select>
+          </div>
+
+          <div class="ngx-md-datepicker-wrapper" layout="column">
+            <ngx-md-datepicker class="w-full" required
+                               [format]="'MM/dd/yyyy HH:mm'"
+                               [placeholder]="frm.get('scheduleType').value !=='once' ? 'Start Date/Time *' : 'Date/Time *'"
+                               formControlName="scheduleDateTimeStart"
+                               [type]="'datetime'"></ngx-md-datepicker>
+
+            <md-hint class="datepicker-hint" *ngIf="formErrors.scheduleDateTimeStart" [ngStyle]="{'color': 'red'}">
+              {{formErrors.scheduleDateTimeStart}}
+            </md-hint>
+          </div>
+
+          <div *ngIf="frm.get('scheduleType').value !== this.scheduleTypeList[0].id">
+            <div class="ngx-md-datepicker-wrapper" layout="column">
+              <ngx-md-datepicker class="w-full"
+                                 [format]="'MM/dd/yyyy HH:mm'"
+                                 [placeholder]="'End Date/Time'"
+                                 formControlName="scheduleDateTimeEnd"
+                                 [type]="'datetime'"></ngx-md-datepicker>
+
+              <md-hint class="datepicker-hint"
+                       *ngIf="frm.get('scheduleDateTimeEnd').hasError('dateRangeInvalid') && frm.get('scheduleDateTimeEnd').dirty"
+                       [ngStyle]="{'color': 'red'}">
+                {{validationMessages.scheduleDateTimeEnd.dateRangeInvalid}}
+              </md-hint>
+            </div>
+
+            <select-day *ngIf="frm.get('scheduleType').value === this.scheduleTypeList[1].id" formControlName="days"
+                        required></select-day>
+
+            <div *ngIf="frm.get('scheduleType').value === this.scheduleTypeList[2].id">
+              <md-select placeholder="Date Of Month *" formControlName="dayOfMonth" class="w-full">
+                <md-option [value]="day" *ngFor="let day of dayInMonths">
+                  {{day}}
+                </md-option>
+              </md-select>
+            </div>
+
+            <div>
+              <md-select placeholder="Status" formControlName="maxRecur" class="w-full">
+                <md-option value="nomax">
+                  No Max
+                </md-option>
+              </md-select>
+            </div>
+
+            <div class="ngx-md-datepicker-wrapper" layout="column">
+              <ngx-md-datepicker class="w-full"
+                                 [format]="'hh:mm a'"
+                                 [placeholder]="'Time Of Date *'"
+                                 formControlName="timeOfDay"
+                                 [type]="'time'"></ngx-md-datepicker>
+            </div>
+          </div>
+
+          <div>
+            <md-select placeholder="Status" formControlName="scheduleStatus" class="w-full"
+                       (change)="changeScheduleStatus($event.value)">
+              <md-option value="true">
+                Enabled
+              </md-option>
+              <md-option value="false">
+                Disabled
+              </md-option>
+            </md-select>
+          </div>
+
+          <div>
+            <md-select placeholder="Templates" formControlName="template" class="w-full"
+                       (change)="changeTemplate($event.value)">
+              <md-option value="N/A">N/A</md-option>
+              <md-option [value]="template" *ngFor="let template of templates">
+                {{template.name}}
+              </md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div layout="row" layout-align="space-between center">
+    <a class="k-button" href="javascript:void(0)"
+       (click)="cancel()">Cancel</a>
+    <button class="k-button k-primary" type="submit"
+            [disabled]="frm.get('name').invalid || frm.get('scheduleDateTimeStart').hasError('dateTimeInvalid') || isSubmit">
+      Save
+    </button>
+  </div>
+</form>

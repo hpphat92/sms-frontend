@@ -1,0 +1,15 @@
+<div id="layout-horizontal-navigation" class="template-layout" layout="column" flex>
+  <div id="toolbar-navigation-container" class="md-whiteframe-1dp">
+    <page-header layout="column" layout-align="space-between start"></page-header>
+  </div>
+
+  <div id="content-container" flex layout="column">
+    <md-content id="content" class="animate-slide-up md-background md-hue-1" flex>
+      <perfect-scrollbar class="h-full">
+        <router-outlet></router-outlet>
+        <page-footer></page-footer>
+      </perfect-scrollbar>
+    </md-content>
+  </div>
+</div>
+<div kendoDialogContainer></div>

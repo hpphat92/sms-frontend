@@ -1,0 +1,33 @@
+$kendo-dialog-max-width: 800px;
+$kendo-dialog-max-scroll: 600px;
+
+kendo-dialog {
+
+  .k-dialog-content {
+    min-height: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    kendo-dialog-actions.k-button-group {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .dialog-scrollable {
+    max-height: $kendo-dialog-max-scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px;
+    margin-bottom: 47px;
+  }
+
+  @media (min-width: $layout-breakpoint-sm) {
+    .k-dialog {
+      max-width: $kendo-dialog-max-width;
+    }
+  }
+}
